@@ -1,3 +1,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.alternative-color {
+    background-color: #121212;
+}
+
+.music-library-barcode {
+    font-family: 'Libre Barcode 128 Text';
+    font-size: 50px;
+}
+
+.auth-form-label {
+    font-family: 'Battambang';
+    font-size: 13px;
+    padding-left: 2px;
+}
+
+.floating-label-content { 
+    position:relative; 
+    margin-bottom:20px;
+    &:focus-within{
+        border: 1px solid #67e8f9  ;
+    }
+}
+
+
+  .floating-label {
+    color:white; 
+    font-size:13px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    background-color: black;
+    top: 10px;
+    left: 4px;
+    background: black;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  .floating-input, .floating-select {
+    font-size:12px;
+    display:block;
+    color: #323840;
+    background-color: black;
+    height: 3rem;
+    padding: .5rem;
+    &:focus{
+        outline:none;
+      ~ .floating-label{
+        color: #67e8f9;
+        top:-15px;
+        left: 4px;
+        background-color: black;
+        font-size:13px;
+      }
+    }
+  }
+
+  select.floating-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  select.floating-select::-ms-expand {
+    display: none;
+  }
+  
+  .floating-input:not(:placeholder-shown) ~ .floating-label {
+    top:-15px;
+    font-size:13px;
+    background-color: black;
+  }
+
+  .floating-input::placeholder{
+    color: transparent;
+  }
