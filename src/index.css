@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.alternative-color {
+    background-color: #121212;
+}
+
+.music-library-barcode {
+    font-family: 'Libre Barcode 128 Text';
+    font-size: 50px;
+}
+
+.auth-form-label {
+    font-family: 'Battambang';
+    font-size: 16px;
+}
