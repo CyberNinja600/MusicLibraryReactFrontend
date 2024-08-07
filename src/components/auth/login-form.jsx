@@ -32,7 +32,7 @@ const LoginForm = () => {
       <FloatingLabel input_name="password" type="password" placeholder="Password" label="Password" onChange={handleChange}/>
 
       <div className='text-neutral-500' name='login'>
-          New to MusicLibrary? <a href="/register" className='hover:text-cyan-300'>Join Now</a>
+          New to MusicLibrary? <a href="/register" className='hover:text-cyan-300 text-cyan-500'>Join Now</a>
       </div>
 
       <div name="register" className="flex justify-center ">
