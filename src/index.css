@@ -28,7 +28,7 @@
 
 
   .floating-label {
-    color:white; 
+    /* color:white;  */
     font-size:13px;
     font-weight:normal;
     position:absolute;
@@ -44,7 +44,7 @@
   .floating-input, .floating-select {
     font-size:12px;
     display:block;
-    color: #323840;
+    /* color: #323840; */
     background-color: black;
     height: 3rem;
     padding: .5rem;
