@@ -3,8 +3,11 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import RegistrationPage from '../pages/Auth/RegistrationPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import HomePage from '../pages/Homepage';
+import { useSelector } from 'react-redux';
 
 const AppRoutes = () => {
+  const user = useSelector((state) => state.user.currentUser);
+
   return (
     <Router>
 

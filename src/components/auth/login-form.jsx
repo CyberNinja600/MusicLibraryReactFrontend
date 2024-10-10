@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import FloatingLabel from '../input/floating-label';
+import { useDispatch } from 'react-redux';
+import { login } from '../../api/redux/apiCalls';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +9,8 @@ const LoginForm = () => {
     password: ''
   
   });
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value} = e.target;
@@ -16,9 +20,13 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
+    const {email, password} = formData;
+    console.log('Form email:', email);
+
+    await login(dispatch, {email, password});
   };
   
   return (
