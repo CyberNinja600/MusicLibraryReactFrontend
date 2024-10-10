@@ -1,5 +1,5 @@
 import { publicRequest } from "../axios";
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
 
 
 export const login = async (dispatch, userCredentials) => {
@@ -15,3 +15,8 @@ export const login = async (dispatch, userCredentials) => {
       throw error;
     }
   };
+
+  export const logoutApi = async (dispatch) => { 
+    await publicRequest.post('/logout');
+    dispatch(logout());
+  }

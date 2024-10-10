@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom';
 import RegistrationPage from '../pages/Auth/RegistrationPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import HomePage from '../pages/Homepage';
@@ -12,15 +12,13 @@ const AppRoutes = () => {
     <Router>
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
+        <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
 
-      <Routes>
-        <Route path="/register" element={<RegistrationPage />} />
-      </Routes>
+        <Route path="/register" element={!user ? <RegistrationPage/> : <Navigate to="/"/>} />
 
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={!user ? <LoginPage/> : <Navigate to="/"/>} />
+
+
       </Routes>
     </Router>
   );
