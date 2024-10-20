@@ -13,7 +13,9 @@ export const login = async (dispatch, userCredentials) => {
       alert("Invalid email")
       dispatch(loginFailure());
     }
-    // throw error;
+    else{
+      throw error;
+    }
   }
 };
 

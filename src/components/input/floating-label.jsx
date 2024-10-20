@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
-const FloatingLabel = ({ input_name, type, placeholder, label, value, onChange }) => {
+const FloatingLabel = ({ input_name, type, placeholder, label, value, onChange, onKeyDown, reference }) => {
   return (
     <div className='flex flex-col w-[382px] floating-label-content border-neutral-500 border-[1px] rounded-sm'>
       <input
@@ -11,6 +11,8 @@ const FloatingLabel = ({ input_name, type, placeholder, label, value, onChange }
         id={input_name}
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
+        ref={reference}
       />
       <label htmlFor={input_name} className='py-1 px-1 text-[#6d6d6d] floating-label'>
         {label}
