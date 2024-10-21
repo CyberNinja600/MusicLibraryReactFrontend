@@ -4,72 +4,90 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../api/redux/apiCalls';
 
 const LoginForm = () => {
-
-  const btnRef = useRef();
-
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
-  
+    password: '',
   });
 
   const dispatch = useDispatch();
+  const btnLogin = useRef();
   const inputPassword = useRef();
   const inputEmail = useRef();
-  
+
   const handleChange = (e) => {
-    const { name, value} = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value 
+      [name]: value,
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    const {email, password} = formData;
-    console.log('Form email:', email);
+    const { email, password } = formData;
+    // console.log('Form email:', email); 
 
-    await login(dispatch, {email, password});
+    await login(dispatch, { email, password });
   };
 
-  const handleKeyDownEmail = (e) => {
+  const handleEnter = (e) => {
     if (e.key === 'Enter') {
-      inputPassword.current.focus();
-    }
-  }
-
-  const handleKeyDownPassword = (e) => {
-    if (e.key === 'Enter') {
-      handleSubmit(e);
+      const isEmpty = (value) => value.trim() === '';
+      if (isEmpty(formData.email)) {
+        inputEmail.current.focus();
+      } else if (isEmpty(formData.password)) {
+        inputPassword.current.focus();
+      } else {
+        btnLogin.current.focus();
+      }
     }
   };
-  
+
   return (
-    <div className='w-auto h-auto lg:w-[471px] lg:h-[753px] p-4 bg-black space-y-4 flex justify-center'>
-    <div className='space-y-4 pt-14 '>
-      <div className='music-library-barcode text-white w-full text-center'>
+    <div className="w-auto h-auto lg:w-[471px] lg:h-[753px] p-4 bg-black space-y-4 flex justify-center">
+      <div className="space-y-4 pt-14 ">
+        <div className="music-library-barcode text-white w-full text-center">
           MusicLibrary
-      </div>
+        </div>
 
-      <FloatingLabel input_name="email" type="email" placeholder="Email" label="Email" onChange={handleChange} onKeyDown={handleKeyDownEmail} reference={inputEmail} />          
-      <FloatingLabel input_name="password" type="password" placeholder="Password" label="Password" onChange={handleChange} onKeyDown={handleKeyDownPassword} reference={inputPassword}/>
+        <FloatingLabel
+          input_name="email"
+          type="email"
+          placeholder="Email"
+          label="Email"
+          onChange={handleChange}
+          onKeyDown={handleEnter}
+          reference={inputEmail}
+        />
+        <FloatingLabel
+          input_name="password"
+          type="password"
+          placeholder="Password"
+          label="Password"
+          onChange={handleChange}
+          onKeyDown={handleEnter}
+          reference={inputPassword}
+        />
 
-      <div className='text-neutral-500' name='login'>
-          New to MusicLibrary? <a href="/register" className='hover:text-cyan-300 text-cyan-500'>Join Now</a>
-      </div>
+        <div className="text-neutral-500" name="login">
+          New to MusicLibrary?{' '}
+          <a href="/register" className="hover:text-cyan-300 text-cyan-500">
+            Join Now
+          </a>
+        </div>
 
-      <div name="register" className="flex justify-center ">
-          <button ref={btnRef} className='p-4 font-bold  border-[1px] focus-within:eborder-cyan-300 text-cyan-300 w-full' onClick={handleSubmit}>
+        <div name="register" className="flex justify-center ">
+          <button
+            className="p-4 font-bold  border-[1px] focus-within:eborder-cyan-300 text-cyan-300 w-full"
+            onClick={handleSubmit}
+            ref={btnLogin}
+          >
             Login
           </button>
+        </div>
       </div>
-
     </div>
-  </div>
-
   );
 };
 
-export default LoginForm
+export default LoginForm;

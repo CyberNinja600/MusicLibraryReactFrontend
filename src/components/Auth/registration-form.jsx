@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import FloatingLabel from '../input/floating-label';
 
 const RegistrationForm = () => {
+
+  const inputEmail = useRef();
+  const inputPassword = useRef();
+  const inputPasswordConfirm = useRef();
+  const btnRegister = useRef();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -15,6 +21,27 @@ const RegistrationForm = () => {
       [name]: value
     });
   };
+
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+
+      const isEmpty = (value) => value.trim() === '';
+
+      if (isEmpty(formData.email)) {
+        inputEmail.current.focus();
+      }
+      else if (isEmpty(formData.password)) {
+        inputPassword.current.focus();
+      }
+      else if (isEmpty(formData.confirm_password)) {
+        inputPasswordConfirm.current.focus();
+      }
+      else {
+        btnRegister.current.focus();
+      }
+    }
+  }
+
 
   const handleSubmit = (e) => {
     // e.preventDefault();
@@ -35,6 +62,8 @@ const RegistrationForm = () => {
           label="Email"
           value={formData.email}
           onChange={handleChange}
+          onKeyDown={handleEnter}
+          reference={inputEmail}
         />
 
         <FloatingLabel
@@ -44,8 +73,10 @@ const RegistrationForm = () => {
           label="Password"
           value={formData.password}
           onChange={handleChange}
+          onKeyDown={handleEnter}
+          reference={inputPassword}
         />
-        
+
         <FloatingLabel
           input_name="confirm_password"
           type="password"
@@ -53,6 +84,8 @@ const RegistrationForm = () => {
           label="Confirm Password"
           value={formData.confirm_password}
           onChange={handleChange}
+          onKeyDown={handleEnter}
+          reference={inputPasswordConfirm}
         />
 
         <div className='text-neutral-500' name='login'>
@@ -62,7 +95,7 @@ const RegistrationForm = () => {
         <div name="register" className="flex justify-center">
           <button
             className='p-4 font-bold border-[1px] focus-within:eborder-cyan-300 text-cyan-500 w-full hover:text-cyan-300'
-            onClick={handleSubmit}
+            onClick={handleSubmit} ref={btnRegister}
           >
             Register
           </button>
