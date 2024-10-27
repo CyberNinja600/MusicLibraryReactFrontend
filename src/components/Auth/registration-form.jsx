@@ -7,6 +7,7 @@ const RegistrationForm = () => {
   const inputPassword = useRef();
   const inputPasswordConfirm = useRef();
   const btnRegister = useRef();
+  const [buttonState, setButtonState] = useState(false);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -44,8 +45,11 @@ const RegistrationForm = () => {
 
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    setButtonState(true)
+    e.preventDefault();
     console.log('Form Data:', formData);
+    alert("hehehe")
+    setButtonState(false)
   };
 
   return (
@@ -94,8 +98,10 @@ const RegistrationForm = () => {
 
         <div name="register" className="flex justify-center">
           <button
-            className='p-4 font-bold border-[1px] focus-within:eborder-cyan-300 text-cyan-500 w-full hover:text-cyan-300'
-            onClick={handleSubmit} ref={btnRegister}
+            className='w-full p-4 font-bold  border-[1px] border-cyan-300 active:border-cyan-500 hover:border-cyan-400 disabled:border-neutral-500 text-cyan-300 active:text-neutral-100 hover:text-neutral-100 disabled:text-neutral-700  hover:bg-cyan-400  active:bg-cyan-500 disabled:bg-neutral-500'
+            onClick={handleSubmit} 
+            ref={btnRegister}
+            disabled={buttonState}
           >
             Register
           </button>

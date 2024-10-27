@@ -9,6 +9,8 @@ const LoginForm = () => {
     password: '',
   });
 
+  const [buttonState, setButtonState] = useState(false);
+
   const dispatch = useDispatch();
   const btnLogin = useRef();
   const inputPassword = useRef();
@@ -22,12 +24,16 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = formData;
-    // console.log('Form email:', email); 
+  // const formValidation = () => {
+  //   if formData.email
+  // } 
 
+  const handleSubmit = async (e) => {
+    setButtonState(true)
+    e.preventDefault();
+    const { email, password } = formData; //Destructing email and password from formData, expects key-value pair 
     await login(dispatch, { email, password });
+    setButtonState(false)
   };
 
   const handleEnter = (e) => {
@@ -78,9 +84,10 @@ const LoginForm = () => {
 
         <div name="register" className="flex justify-center ">
           <button
-            className="p-4 font-bold  border-[1px] focus-within:eborder-cyan-300 text-cyan-300 w-full"
+            className="w-full p-4 font-bold  border-[1px] border-cyan-300 active:border-cyan-500 hover:border-cyan-400 disabled:border-neutral-500 text-cyan-300 active:text-neutral-100 hover:text-neutral-100 disabled:text-neutral-700  hover:bg-cyan-400  active:bg-cyan-500 disabled:bg-neutral-500"
             onClick={handleSubmit}
             ref={btnLogin}
+            disabled={buttonState}
           >
             Login
           </button>
