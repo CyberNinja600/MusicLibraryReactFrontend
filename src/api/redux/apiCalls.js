@@ -23,3 +23,14 @@ export const logoutApi = async (dispatch) => {
   await publicRequest.post('/logout');
   dispatch(logout());
 }
+
+
+export const register = async (userCredentials) => {
+  try {
+    const response = await publicRequest.post('/register', userCredentials);
+    return {success: true, data:response.data}
+  }
+  catch (error) {
+    return {success: false, data: error.response? error.response.data : error.message};
+  }
+}

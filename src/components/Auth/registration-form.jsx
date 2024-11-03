@@ -1,15 +1,22 @@
 import React, { useState, useRef } from 'react';
 import FloatingLabel from '../input/floating-label';
+import { register } from '../../api/redux/apiCalls';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
 
+  const inputName = useRef();
+  const inputUserName = useRef();
   const inputEmail = useRef();
   const inputPassword = useRef();
   const inputPasswordConfirm = useRef();
   const btnRegister = useRef();
   const [buttonState, setButtonState] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    name: '',
+    username: '',
     email: '',
     password: '',
     confirm_password: ''
@@ -31,6 +38,12 @@ const RegistrationForm = () => {
       if (isEmpty(formData.email)) {
         inputEmail.current.focus();
       }
+      else if (isEmpty(formData.name)){
+        inputName.current.focus()
+      }
+      else if (isEmpty(formData.username)){
+        inputUserName.current.focus()
+      }
       else if (isEmpty(formData.password)) {
         inputPassword.current.focus();
       }
@@ -44,11 +57,22 @@ const RegistrationForm = () => {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setButtonState(true)
     e.preventDefault();
-    console.log('Form Data:', formData);
-    alert("hehehe")
+    const response = await register(formData );
+
+    if (response.success){
+      alert("Registration Successful");
+      navigate('/login')
+    }
+    else{
+      const errorMessages = Object.values(response.data)
+      .flat()
+      .join("\n");
+
+      alert(errorMessages)
+    }
     setButtonState(false)
   };
 
@@ -69,6 +93,29 @@ const RegistrationForm = () => {
           onKeyDown={handleEnter}
           reference={inputEmail}
         />
+        
+        <FloatingLabel
+          input_name="name"
+          type="text"
+          placeholder="Name"
+          label="Name"
+          value={formData.name}
+          onChange={handleChange}
+          onKeyDown={handleEnter}
+          reference={inputName}
+        />
+
+        <FloatingLabel
+          input_name="username"
+          type="text"
+          placeholder="User Name"
+          label="User Name"
+          value={formData.username}
+          onChange={handleChange}
+          onKeyDown={handleEnter}
+          reference={inputUserName}
+        />
+
 
         <FloatingLabel
           input_name="password"
