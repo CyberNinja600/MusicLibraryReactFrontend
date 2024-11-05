@@ -17,20 +17,13 @@ const HomePage = () => {
 
   return (
     <div>
-      {/* <h1>Home Page</h1>
-      <p>Welcome to the Home Page!</p>
-      <button onClick={handleLogout}> Log out </button> */}
+
       <div className="bg-red-300 h-screen w-screen">
 
           <TopNavigation onclick_function={handleLogout}/>
-
-
           <MainMenu/>
-
-
           <MusicPlayerShell/>
 
-          
       </div>
     </div>
   );
