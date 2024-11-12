@@ -12,6 +12,10 @@
     font-size: 50px;
 }
 
+.music-library-barcode-size{
+  font-family: 'Libre Barcode 128 Text';
+}
+
 .auth-form-label {
     font-family: 'Battambang';
     font-size: 13px;
