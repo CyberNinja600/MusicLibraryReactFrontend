@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 
 const FloatingLabel = ({ input_name, type, placeholder, label, value, onChange, onKeyDown, reference }) => {
   return (
