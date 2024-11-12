@@ -2,7 +2,7 @@ import React from 'react';
 
 const MainMenu = () => {
     return (
-        <div name="main_menu" className='h-[84%] flex'>
+        <div name="main_menu" className='h-[84%] flex antialiased '>
             <div name="your_music" className='w-[15%] bg-cyan-300'>
                 This is your music
             </div>
