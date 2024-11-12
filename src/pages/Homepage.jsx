@@ -18,7 +18,7 @@ const HomePage = () => {
   return (
     <div>
 
-      <div className="bg-red-300 h-screen w-screen">
+      <div className="bg-neutral-900 h-screen w-screen min-w-[375px]">
 
           <TopNavigation onclick_function={handleLogout}/>
           <MainMenu/>
