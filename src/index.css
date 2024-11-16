@@ -30,6 +30,10 @@
     }
 }
 
+.media-item-img {
+  width: 48px !important;
+  height: 48px !important;
+}
 
   .floating-label {
     /* color:white;  */

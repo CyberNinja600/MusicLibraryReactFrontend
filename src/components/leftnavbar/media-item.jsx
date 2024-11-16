@@ -1,18 +1,15 @@
 import React from 'react';
 
-const MediaItem = () => {
+const MediaItem = ({img, playlist_name}) => {
     return (
         
-        <div className='bg-blue-300 m-2 flex'>
-            <div name="img" className='bg-cyan-300'>
-                Img here
+        <div className='m-2 flex overflow-auto p-2'>
+            <div name="img" className='m-1'>
+                <img src={img} alt="" className='min-h-[48px] min-w-[48px] max-h-[48px] max-w-[48px]' />
             </div>
-            <div className='w-full'>
-                <div name="song_name" className='bg-purple-300'>
-                    Song Name
-                </div>
-                <div name="artist_name" className='bg-slate-400'>
-                    Artists Name
+            <div className='flex w-full text-start'>
+                <div className='ml-2 text-white'>
+                    {playlist_name}
                 </div>
             </div>
         </div>
