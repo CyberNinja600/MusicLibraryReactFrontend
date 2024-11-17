@@ -6,6 +6,8 @@ export const login = async (dispatch, userCredentials) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post('/login', userCredentials);
+    console.log('Response Headers:', res.headers); // Full response headers
+    console.log('Cookies:', res.headers['set-cookie'])
     dispatch(loginSuccess(res.data));
   } catch (error) {
     if (error.response && error.response.status === 403) {
@@ -33,4 +35,9 @@ export const register = async (userCredentials) => {
   catch (error) {
     return {success: false, data: error.response? error.response.data : error.message};
   }
+}
+
+export const fetchUser = async (user) => {
+  console.log(user.token);
+  // const res = await publicRequest.post('/user');
 }
