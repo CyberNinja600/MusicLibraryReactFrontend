@@ -11,10 +11,15 @@ const currentUser = user && JSON.parse(user).currentUser;
 const TOKEN = currentUser?.accessToken;
 
 export const publicRequest = axios.create({
-  baseURL: BASE_URL
+  baseURL: BASE_URL,
+  withCredentials: true,  
 });
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
-  headers: { token: `${TOKEN}` }
+  // headers: {
+  //   'Authorization': `${TOKEN}`,
+  //   'Content-Type': 'application/json'
+  // },
+  withCredentials: true
 });
