@@ -1,13 +1,12 @@
-import { publicRequest } from "../axios";
+import { publicRequest, userRequest } from "../axios";
+import {store} from './store';
 import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
-
+import Cookies from 'universal-cookie'
 
 export const login = async (dispatch, userCredentials) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post('/login', userCredentials);
-    console.log('Response Headers:', res.headers); // Full response headers
-    console.log('Cookies:', res.headers['set-cookie'])
     dispatch(loginSuccess(res.data));
   } catch (error) {
     if (error.response && error.response.status === 403) {
@@ -38,6 +37,5 @@ export const register = async (userCredentials) => {
 }
 
 export const fetchUser = async (user) => {
-  console.log(user.token);
-  // const res = await publicRequest.post('/user');
-}
+  await userRequest.get('user');
+};
