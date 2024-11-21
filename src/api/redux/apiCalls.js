@@ -1,16 +1,14 @@
 import { publicRequest, userRequest } from "../axios";
-import {store} from './store';
 import { loginFailure, loginStart, loginSuccess, logout } from "./userRedux";
-import Cookies from 'universal-cookie'
 
 export const login = async (dispatch, userCredentials) => {
   dispatch(loginStart());
   try {
     const res = await publicRequest.post('/login', userCredentials);
     dispatch(loginSuccess(res.data));
-  } catch (error) {
+  } 
+  catch (error) {
     if (error.response && error.response.status === 403) {
-      // throw new Error('Invalid email or password');
       alert("Invalid email")
       dispatch(loginFailure());
     }
@@ -36,6 +34,11 @@ export const register = async (userCredentials) => {
   }
 }
 
-export const fetchUser = async (user) => {
+export const fetchUser = async () => {
   await userRequest.get('user');
 };
+
+export const fetchMyAlbum = async () =>{
+  const response = await userRequest.get('albums/list')
+  return {success: true, data:response.data}
+}
