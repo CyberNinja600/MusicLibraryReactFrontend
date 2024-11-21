@@ -1,70 +1,8 @@
-import React from 'react';
 import MediaItem from './media-item';
 
-const albums = [
 
-    {   'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-1',
-        'playlist_link' : 'playlist_link1'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-2',
-        'playlist_link' : 'playlist_link2'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-3',
-        'playlist_link' : 'playlist_link3'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-4',
-        'playlist_link' : 'playlist_link4'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-5',
-        'playlist_link' : 'playlist_link5'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-6',
-        'playlist_link' : 'playlist_link6'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-7',
-        'playlist_link' : 'playlist_link7'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-8',
-        'playlist_link' : 'playlist_link8'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-9',
-        'playlist_link' : 'playlist_link9'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-10',
-        'playlist_link' : 'playlist_link10'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-11',
-        'playlist_link' : 'playlist_link11'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-12',
-        'playlist_link' : 'playlist_link12'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-13',
-        'playlist_link' : 'playlist_link13'
-    },
-    {    'img' : 'https://lastfm.freetls.fastly.net/i/u/ar0/5e03d7c6d69c19819b07cef436e73413.jpg',
-        'playlist_name' : 'Album-14',
-        'playlist_link' : 'playlist_link14'
-    },
-
-];
-
-
-
-const LeftNavBar = () => {
+const LeftNavBar = (myAlbums) => {
+    const albums = Array.isArray(myAlbums) ? myAlbums : myAlbums.myAlbums || [];
     return (
 
         <div className='h-full bg-black sm:p-2 z-0 overflow-clip'>
@@ -82,9 +20,17 @@ const LeftNavBar = () => {
             
             <div className='h-[93%] mt-4 sm:mt-0 sm:p-4 overflow-clip '>
                 <div className='px-1 my-3 mb-[15px] overflow-y-scroll your-playlist-scroll h-full'>
-                    {albums.map((album,index) => (
-                        <MediaItem key={index} img={album.img} playlist_name={album.playlist_name}/>
-                    ))}
+                    {albums.length > 0 ? (
+                        albums.map((album, index) => (
+                            <MediaItem
+                                key={index}
+                                img={album.image_url}
+                                playlist_name={album.name}
+                            />
+                        ))
+                    ) : (
+                        <p className="text-gray-500 text-center">No albums found.</p>
+                    )}
                 </div>
             </div>
         </div>
