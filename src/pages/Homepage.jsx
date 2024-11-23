@@ -1,6 +1,6 @@
 import React,{useEffect, useCallback, useState} from 'react';
 import { useDispatch} from 'react-redux';
-import { logoutApi, fetchMyAlbum } from './../api/redux/apiCalls';
+import { logoutApi, fetchMyAlbum, fetchAllAlbum } from './../api/redux/apiCalls';
 
 import TopNavigation from './../components/main/top-navigation';
 import MainMenu from './../components/main/main-menu'
@@ -15,6 +15,10 @@ const HomePage = () => {
 
   });
 
+  const [allAlbums, setAllAlbums] = useState({
+
+  });
+
 
   const fetchUserAlbum = useCallback(async () => {
     try {
@@ -22,6 +26,12 @@ const HomePage = () => {
       if (result.success) {
         setMyAlbums(result.data);
       }
+
+      const result_all = await fetchAllAlbum();
+      if(result_all.success){
+        setAllAlbums(result_all.data)
+      }
+
     } catch (error) {
       console.error('Error fetching albums:', error);
     }
@@ -43,7 +53,7 @@ const HomePage = () => {
 
       <div className="bg-black min-h-[667px] h-screen w-screen min-w-[375px]">
           <TopNavigation onclick_function={handleLogout}/>
-          <MainMenu myAlbums={myAlbums} className="z-10"/>
+          <MainMenu myAlbums={myAlbums} allAlbums={allAlbums} className="z-10"/>
           <MusicPlayerShell className="z-20"/>
       </div>
     </div>
