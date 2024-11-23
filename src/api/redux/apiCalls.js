@@ -42,3 +42,8 @@ export const fetchMyAlbum = async () =>{
   const response = await userRequest.get('albums/list')
   return {success: true, data:response.data}
 }
+
+export const fetchAllAlbum = async () =>{
+  const response = await userRequest.get('albums/list')
+  return {success: true, data:response.data}
+}

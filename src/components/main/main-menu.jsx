@@ -1,10 +1,10 @@
 import React from 'react';
 import LeftNavBar from '../leftnavbar/left-nav-bar';
 
-const MainMenu = ({myAlbums}) => {
+const MainMenu = ({myAlbums, allAlbums}) => {
     return (
         <div name="main_menu" className='h-[84%] flex antialiased '>
-            <div name="leftnavbar" className='w-[22%] bg-cyan-300'>
+            <div name="leftnavbar" className='w-[22%] bg-black '>
                 <LeftNavBar myAlbums={myAlbums}/>
             </div>
 
