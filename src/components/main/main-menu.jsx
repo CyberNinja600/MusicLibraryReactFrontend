@@ -1,5 +1,6 @@
 import React from 'react';
 import LeftNavBar from '../leftnavbar/left-nav-bar';
+import Homepage from '../homepage/homepage';
 
 const MainMenu = ({myAlbums, allAlbums}) => {
     return (
@@ -9,9 +10,9 @@ const MainMenu = ({myAlbums, allAlbums}) => {
             </div>
 
             <div name="home_page" className='w-[78%] bg-cyan-200'>
-                This is home_page
+                <Homepage allAlbums={allAlbums}/>
             </div>
-      </div>
+      </div>    
     );
 }
 
