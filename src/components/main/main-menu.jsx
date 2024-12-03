@@ -9,7 +9,7 @@ const MainMenu = ({myAlbums, allAlbums}) => {
                 <LeftNavBar myAlbums={myAlbums}/>
             </div>
 
-            <div name="home_page" className='w-[78%] bg-cyan-200'>
+            <div name="home_page" className='w-[78%] bg-black'>
                 <Homepage allAlbums={allAlbums}/>
             </div>
       </div>    
