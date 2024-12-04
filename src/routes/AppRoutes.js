@@ -4,19 +4,21 @@ import RegistrationPage from '../pages/Auth/RegistrationPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import HomePage from '../pages/Homepage';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 
 const AppRoutes = () => {
   const user = useSelector((state) => state.user.currentUser);
-
+  const jwtToken = Cookies.get('jwt');
+  const isAuthenticated = user || jwtToken;
   return (
     <Router>
 
       <Routes>
-        <Route path="/" element={user ? <HomePage /> : <Navigate to="/login"/>} />
+        <Route path="/" element={isAuthenticated ? <HomePage /> : <Navigate to="/login"/>} />
 
-        <Route path="/register" element={!user ? <RegistrationPage/> : <Navigate to="/"/>} />
+        <Route path="/register" element={!isAuthenticated ? <RegistrationPage/> : <Navigate to="/"/>} />
 
-        <Route path="/login" element={!user ? <LoginPage/> : <Navigate to="/"/>} />
+        <Route path="/login" element={!isAuthenticated ? <LoginPage/> : <Navigate to="/"/>} />
 
 
       </Routes>
