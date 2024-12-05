@@ -9,7 +9,8 @@ import Cookies from 'js-cookie';
 const AppRoutes = () => {
   const user = useSelector((state) => state.user.currentUser);
   const jwtToken = Cookies.get('jwt');
-  const isAuthenticated = user || jwtToken;
+  const jwtStatus = jwtToken !== undefined;
+  const isAuthenticated = user && jwtStatus;
   return (
     <Router>
 
