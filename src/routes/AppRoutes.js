@@ -10,7 +10,7 @@ const AppRoutes = () => {
   const user = useSelector((state) => state.user.currentUser);
   const jwtToken = Cookies.get('jwt');
   const jwtStatus = jwtToken !== undefined;
-  const isAuthenticated = user && jwtStatus;
+  const isAuthenticated = user || jwtStatus;
   return (
     <Router>
 
