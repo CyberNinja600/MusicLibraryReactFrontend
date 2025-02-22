@@ -34,16 +34,52 @@ export const register = async (userCredentials) => {
   }
 }
 
-export const fetchUser = async () => {
-  await userRequest.get('user');
+export const fetchUser = async (dispatch, getState) => {
+  try{
+    const token = getState().user.currentUser?.token;  // Get token from Redux store
+    const headers = token ? { Authorization: `${token}` } : {};
+    const response = await userRequest.get('user', { headers });
+    return { success: true, data: response.data };    
+  }
+  catch (error){
+    dispatch(logout());
+  }
+
 };
 
-export const fetchMyAlbum = async () =>{
-  const response = await userRequest.get('albums/list')
-  return {success: true, data:response.data}
-}
+export const fetchMyAlbum = async (dispatch, jwt_token) => {
+  try{
+    const token = jwt_token;
+    const headers = token ? { Authorization: `${token}` } : {};
+    const response = await userRequest.get('albums/list', {headers});
+    return { success: true, data: response.data };
+  }
+  catch (error) {
+    if(error.response.status == 403){
+      dispatch(logout());
+    }
+    else{
+      return {success: false, data: error.response? error.response.data : error.message};
+    }
+  }
+};
 
-export const fetchAllAlbum = async () =>{
-  const response = await userRequest.get('albums/list')
-  return {success: true, data:response.data}
-}
+export const fetchAllAlbum = async(dispatch, jwt_token) => {
+
+  try{
+    const token = jwt_token;
+    const headers = token ? { Authorization: `${token}` } : {};
+    const response = await userRequest.get('albums/list', {headers});
+    return { success: true, data: response.data };
+  }
+
+  catch (error) {
+    if(error.response.status == 403){
+      dispatch(logout());
+    }
+    else{
+      return {success: false, data: error.response? error.response.data : error.message};
+    }
+  }
+
+};

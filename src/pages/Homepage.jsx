@@ -1,5 +1,5 @@
 import React,{useEffect, useCallback, useState} from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { logoutApi, fetchMyAlbum, fetchAllAlbum } from './../api/redux/apiCalls';
 
 import TopNavigation from './../components/main/top-navigation';
@@ -7,9 +7,9 @@ import MainMenu from './../components/main/main-menu'
 import MusicPlayerShell from './../components/musicPlayer/music-player-shell'
 
 const HomePage = () => {
-  
+  const dispatch = useDispatch()
 
-  // const currentUser = useSelector((state) => state.user.currentUser);
+  const token = useSelector((state) => state.user.currentUser.token);
 
   const [myAlbums, setMyAlbums] = useState({
 
@@ -22,16 +22,21 @@ const HomePage = () => {
 
   const fetchUserAlbum = useCallback(async () => {
     try {
-      const result = await fetchMyAlbum();
+      const result = await fetchMyAlbum(dispatch,token);
       if (result.success) {
         setMyAlbums(result.data);
       }
+      else{
+        console.log(result);
+      }
 
-      const result_all = await fetchAllAlbum();
+      const result_all = await fetchAllAlbum(dispatch,token);
       if(result_all.success){
         setAllAlbums(result_all.data)
       }
-
+      else{
+        console.log(result_all);
+      }
     } catch (error) {
       console.error('Error fetching albums:', error);
     }
@@ -43,7 +48,6 @@ const HomePage = () => {
   }, [fetchUserAlbum]);
   
 
-  const dispatch = useDispatch()
   const handleLogout = () => { 
     logoutApi(dispatch)
   } 

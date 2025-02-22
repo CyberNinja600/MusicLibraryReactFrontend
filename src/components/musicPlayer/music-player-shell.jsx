@@ -7,7 +7,7 @@ import AccesoriesControl from './accesories-control'
 const MusicPlayerShell = () => {
     return (
         <div name="music_player" className='bg-neutral-500 h-[10%] flex'>
-            <div name="playback_status" className='bg-red-300'>
+            <div name="playback_status" className='bg-neutral-950'>
                 <PlaybackStatus/>
             </div>
 
